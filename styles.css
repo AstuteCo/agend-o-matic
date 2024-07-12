@@ -1,0 +1,74 @@
+/* Define the Roboto Mono font family */
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-Medium.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-SemiBold.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-SemiBoldItalic.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-Regular.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-LightItalic.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-BoldItalic.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-ExtraLight.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-ThinItalic.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-ExtraLightItalic.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-Light.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-MediumItalic.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-Bold.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-Italic.ttf') format('truetype'),
+         url('fonts/Roboto_Mono/static/RobotoMono-Thin.ttf') format('truetype');
+  }
+  
+  /* Define the Lexend Exa font family */
+  @font-face {
+    font-family: 'Lexend Exa';
+    src: url('fonts/Lexend_Exa/LexendExa-VariableFont_wght.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-ExtraLight.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-ExtraBold.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-Medium.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-SemiBold.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-Light.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-Black.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-Regular.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-Thin.ttf') format('truetype'),
+         url('fonts/Lexend_Exa/static/LexendExa-Bold.ttf') format('truetype');
+  }
+  
+  /* Define the Roboto font family */
+  @font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto/Roboto-Medium.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-Light.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-Regular.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-MediumItalic.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-ThinItalic.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-BoldItalic.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-LightItalic.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-Italic.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-BlackItalic.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-Bold.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-Thin.ttf') format('truetype'),
+         url('fonts/Roboto/Roboto-Black.ttf') format('truetype');
+  }
+
+html, body {
+    height: 100%;
+}
+
+body.main-page {
+    background: #231F20;
+    color: #F8F7F5;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-page h1, .main-page h2, .main-page h3, .main-page h4, .main-page h5, .main-page h6 {
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.main-div * {
+    margin: 0;
+}
+
+.main-page a {
+    color: #ab8105;
+}

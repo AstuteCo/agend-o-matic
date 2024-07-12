@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astute Agend-o-Matic</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="robots" content="noindex">
+</head>
+<body class="main-page" style="display:grid;place-items:center;">
+  <div class="main-div" style="display: grid;place-items: center;gap: 1rem;text-align: center;">
+    <h1>Astute Communications<br/> Agend-o-Matic</h1>
+    <p>Feed me a ZIP file containing an HTML file, please.</p>
+    <input type="file" id="fileInput" accept=".zip">
+    <div id="output"></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
