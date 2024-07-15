@@ -39,7 +39,7 @@ async function applyStylesAndConvertToPdf(htmlContent, zip) {
     const doc = parser.parseFromString(htmlContent, 'text/html');
     const images = doc.querySelectorAll('img');
 
-    for (const img of images) {
+    const imagePromises = Array.from(images).map(async (img) => {
       let src = img.getAttribute('src');
       if (src) {
         src = decodeURIComponent(src);
@@ -61,7 +61,9 @@ async function applyStylesAndConvertToPdf(htmlContent, zip) {
           console.error(`Image file not found in ZIP: ${src}`);
         }
       }
-    }
+    });
+
+    await Promise.all(imagePromises);
 
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = doc.body.innerHTML;
@@ -87,7 +89,7 @@ async function applyStylesAndConvertToPdf(htmlContent, zip) {
 
     console.log("Styled HTML content:", styledHtml);
 
-    displayPdf(styledHtml, title);
+    await displayPdf(styledHtml, title);
   } catch (error) {
     console.error("Error applying styles and converting to PDF:", error);
     alert('An error occurred while applying styles and converting to PDF.');
@@ -101,7 +103,7 @@ function generateFileName(title) {
     .replace(/\s+/g, '-');
 }
 
-function displayPdf(htmlContent, title) {
+async function displayPdf(htmlContent, title) {
   const iframe = document.createElement('iframe');
   iframe.style.display = 'none';
   document.body.appendChild(iframe);
@@ -111,33 +113,48 @@ function displayPdf(htmlContent, title) {
   doc.write(htmlContent);
   doc.close();
 
-  iframe.onload = () => {
+  iframe.onload = async () => {
     console.log("Iframe loaded");
     const iframeBody = iframe.contentWindow.document.body;
     console.log("Iframe body content:", iframeBody.innerHTML);
 
-    const options = {
-      margin: 1,
-      filename: `${title}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+    await waitForImagesToLoad(iframeBody);
 
-    try {
-      if (typeof window.html2pdf === 'function') {
-        window.html2pdf().from(iframeBody).set(options).save().then(() => {
+    setTimeout(async () => {
+      const options = {
+        margin: 1,
+        filename: `${title}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      try {
+        if (typeof window.html2pdf === 'function') {
+          await window.html2pdf().from(iframeBody).set(options).save();
           document.body.removeChild(iframe);
-        }).catch((error) => {
-          console.error("Error generating PDF:", error);
-          alert('An error occurred while generating the PDF.');
-        });
-      } else {
-        throw new Error('html2pdf function not available');
+        } else {
+          throw new Error('html2pdf function not available');
+        }
+      } catch (error) {
+        console.error("Error: html2pdf function not available", error);
+        alert('An error occurred: html2pdf function not available.');
       }
-    } catch (error) {
-      console.error("Error: html2pdf function not available", error);
-      alert('An error occurred: html2pdf function not available.');
-    }
+    }, 5000); // Extended delay to ensure all content is rendered
   };
+}
+
+function waitForImagesToLoad(container) {
+  const images = container.querySelectorAll('img');
+  const imageLoadPromises = Array.from(images).map((img) => {
+    return new Promise((resolve) => {
+      if (img.complete) {
+        resolve();
+      } else {
+        img.onload = resolve;
+        img.onerror = resolve;
+      }
+    });
+  });
+  return Promise.all(imageLoadPromises);
 }
