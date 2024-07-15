@@ -53,6 +53,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    color: #231F20;
+    background: unset;
 }
 
 h1, h2, h3, h4, h5, h6 {
