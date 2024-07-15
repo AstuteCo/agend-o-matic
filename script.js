@@ -42,13 +42,20 @@ function applyStylesAndConvertToPdf(htmlContent) {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = cleanedHtmlContent;
     const h1 = tempDiv.querySelector('h1');
-    const title = h1 ? h1.textContent.trim() : 'output';
+    const title = h1 ? generateFileName(h1.textContent.trim()) : 'output';
 
     displayPdf(cleanedHtmlContent, title);
   } catch (error) {
     console.error("Error applying styles and converting to PDF:", error);
     alert('An error occurred while applying styles and converting to PDF.');
   }
+}
+
+function generateFileName(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-');
 }
 
 function displayPdf(htmlContent, title) {
