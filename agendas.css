@@ -55,8 +55,19 @@ body {
     font-family: 'Roboto', sans-serif;
     color: #231F20;
     background: unset;
+    max-width: 75ch;
+    margin: 1.5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lexend Exa', sans-serif;
+}
+
+p {
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
