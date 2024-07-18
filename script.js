@@ -38,6 +38,7 @@ async function applyStylesAndConvertToSingleHtml(htmlContent, cssContent, zip) {
   try {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, 'text/html');
+    const nativeStyles = doc.querySelector('style') ? doc.querySelector('style').outerHTML : '';
     const images = doc.querySelectorAll('img');
     const links = doc.querySelectorAll('a');
 
@@ -90,6 +91,7 @@ async function applyStylesAndConvertToSingleHtml(htmlContent, cssContent, zip) {
     const styledHtml = `
       <html>
         <head>
+          ${nativeStyles}
           <style>${cssContent}</style>
         </head>
         <body>

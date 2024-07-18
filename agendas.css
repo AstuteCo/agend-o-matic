@@ -48,3 +48,17 @@ a:hover {
   color: #ab8105;
   text-decoration-color: currentColor;
 }
+
+ol > li,
+ul > li {
+  font-family: 'Lexend Exa', sans-serif;
+  text-transform: uppercase;
+}
+
+ol > li > ol > li,
+ul > li > ol > li,
+ul > li > ul > li,
+ol > li > ul > li {
+  font-family: 'Roboto', sans-serif;
+  text-transform: none;
+}
