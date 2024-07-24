@@ -59,14 +59,22 @@ async function applyStylesAndConvertToSingleHtml(htmlContent, cssContent, zip) {
           console.log(`Found image file in ZIP: ${src}`);
           const blob = await imageFile.async('blob');
           const base64 = await convertBlobToBase64(blob);
-          img.setAttribute('src', base64);
+          
+          // Check if the image is an SVG
+          if (src.endsWith('.svg')) {
+            const svgContent = await imageFile.async('text');
+            const svgElement = parser.parseFromString(svgContent, 'image/svg+xml').documentElement;
+            img.replaceWith(svgElement);
+          } else {
+            img.setAttribute('src', base64);
+          }
         } else {
           console.error(`Image file not found in ZIP: ${src}`);
         }
       }
 
       // Remove anchor tag if it wraps the image
-      if (img.parentElement.tagName === 'A') {
+      if (img.parentElement && img.parentElement.tagName === 'A') {
         const parent = img.parentElement;
         parent.parentElement.insertBefore(img, parent);
         parent.parentElement.removeChild(parent);
