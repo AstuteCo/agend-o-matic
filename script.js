@@ -65,6 +65,13 @@ async function applyStylesAndConvertToSingleHtml(htmlContent, cssContent, zip) {
             const svgContent = await imageFile.async('text');
             const svgElement = parser.parseFromString(svgContent, 'image/svg+xml').documentElement;
             img.replaceWith(svgElement);
+
+            // Remove anchor tag if it wraps the SVG
+            if (svgElement.parentElement && svgElement.parentElement.tagName === 'A') {
+              const parent = svgElement.parentElement;
+              parent.parentElement.insertBefore(svgElement, parent);
+              parent.parentElement.removeChild(parent);
+            }
           } else {
             img.setAttribute('src', base64);
           }
@@ -83,7 +90,7 @@ async function applyStylesAndConvertToSingleHtml(htmlContent, cssContent, zip) {
 
     // Ensure all other anchor tags open in a new tab
     links.forEach((link) => {
-      if (!link.querySelector('img')) {
+      if (!link.querySelector('img') && !link.querySelector('svg')) {
         link.setAttribute('target', '_blank');
       }
     });
